@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
+import Sign_Up from './Components/Sign_Up/Sign_Up';
+import Login from './Components/Login/Login';
 
-// Define your route components here (e.g., Home, About, etc.)
 function Home() {
   return <h2>Home Page</h2>;
 }
@@ -19,7 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          {/* Define more routes as needed */}
+          <Route path="/" element={<Sign_Up />} /> {/* Route for Sign_Up */}
+          <Route path="/" element={<Login />} /> {/* Route for Login */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import Landing_Page from './components/Landing_Page/Landing_page';
+
 import "./Landing_Page.css";
 
 const Landing_Page = () => {
