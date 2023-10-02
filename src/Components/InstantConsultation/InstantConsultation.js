@@ -3,17 +3,6 @@ import './InstantConsultation.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import FindDoctorSearchIC from './FindDoctorSearchIC/FindDoctorSearchIC';
 import DoctorCardIC from './DoctorCardIC/DoctorCardIC';
-import { useNavigate, useSearchParams } from 'react-router-dom';
- const [searchParams] = useSearchParams();
-   if (searchParams.get('speciality')) {
-                // window.reload()
-                const filtered = data.filter(doctor => doctor.speciality.toLowerCase() === searchParams.get('speciality').toLowerCase());
-
-                setFilteredDoctors(filtered);
-                
-                setIsSearched(true);
-                window.reload()
-            }
 
 const InstantConsultation = () => {
     const [searchParams] = useSearchParams();
@@ -63,10 +52,10 @@ const InstantConsultation = () => {
     const navigate = useNavigate();
     useEffect(() => {
         getDoctorsDetails();
-        // const authtoken = sessionStorage.getItem("auth-token");
-        // if (!authtoken) {
-        //     navigate("/login");
-        // }
+        const authtoken = sessionStorage.getItem("auth-token");
+        if (!authtoken) {
+            navigate("/login");
+        }
     }, [searchParams])
 
     return (
