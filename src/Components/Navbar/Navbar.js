@@ -1,45 +1,79 @@
-import React from 'react';
-import './Navbar.css'; // Import the CSS file
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
-function Navbar() {
+const Navbar = () => {
+    const [click, setClick] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return (
-    <nav>
-    <div className="nav__logo">
-      <a href="#">
-        StayHealthy
-        <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 1000 1000" style={{ fill: '#3685fb' }}>
-          <title>Doctor With Stethoscope SVG icon</title>
-          <g>
-            {/* Your SVG path */}
-          </g>
-        </svg>
-      </a>
-      <span>.</span>
-    </div>
-    <div className="nav__icon" onClick={'handleClick'}>
-      <i className="fa fa-times fa fa-bars"></i>
-    </div>
-    <ul className="nav__links active">
-      <li className="link">
-        <a href="../Landing_Page/LandingPage.html">Home</a>
-      </li>
-      <li className="link">
-        <a href="#">Appointments</a>
-      </li>
-      <li className="link">
-        <a href="../Sign_Up//Sign_Up.html">
-          <button className="btn1">Sign Up</button>
-        </a>
-      </li>
-      <li className="link">
-        <a href="../Login/Login.html">
-          <button className="btn1">Login</button>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  );
-}
+    const handleClick = () => setClick(!click);
+
+    const handleLogout = () => {
+        sessionStorage.removeItem("auth-token");
+        sessionStorage.removeItem("name");
+        sessionStorage.removeItem("email");
+        sessionStorage.removeItem("phone");
+        // remove email and phone
+        localStorage.removeItem("doctorData");
+        setIsLoggedIn(false);
+        window.location.reload();
+    }
+
+    useEffect(() => { 
+      const storedEmail = sessionStorage.getItem("email");
+
+      if (storedEmail) {
+        setIsLoggedIn(true);
+      }
+    }, []);
+
+    return (
+        <nav>
+            <div className="nav__logo">
+                <Link to="/">StayHealthy <i style={{color:'#2190FF'}} className="fa fa-user-md"></i></Link>
+                <span>.</span>
+            </div>
+            <div className="nav__icon" onClick={handleClick}>
+                <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
+            </div>
+            <ul className={click ? 'nav__links active' : 'nav__links'}>
+                <li className="link">
+                    <Link to="/">Home</Link>
+                </li>
+                <li className="link">
+                    <Link to="/search/doctors">Appointments</Link>
+                </li>
+                <li className="link">
+                    <Link to="/healthblog">Health Blog</Link>
+                </li>
+                <li className="link">
+                    <Link to="/reviews">Reviews</Link>
+                </li>
+                {isLoggedIn ? (
+                    <>
+                        <li className="link">
+                            <button className="btn2" onClick={handleLogout}>
+                                Logout
+                            </button>
+                        </li>
+                    </>
+                ) : (
+                    <>
+                        <li className="link">
+                            <Link to="/Sign_Up">
+                                <button className="btn1">Sign Up</button>
+                            </Link>
+                        </li>
+                        <li className="link">
+                            <Link to="/login">
+                                <button className="btn1">Login</button>
+                            </Link>
+                        </li>
+                    </>
+                )}
+            </ul>
+        </nav>
+    );
+};
 
 export default Navbar;

@@ -1,11 +1,13 @@
 import React from "react";
-import Landing_Page from './components/Landing_Page/Landing_page';
-
+import { BrowserRouter, Routes} from 'react-router-dom';
 import "./Landing_Page.css";
 
 const Landing_Page = () => {
   return (
     <section className="hero-section">
+        <BrowserRouter>
+        <Routes>
+             
       <div>
         <div data-aos="fade-up" className="flex-hero">
             
@@ -32,6 +34,8 @@ const Landing_Page = () => {
         </div>
 
       </div>
+      </Routes>
+      </BrowserRouter>
     </section>
   );
 };
