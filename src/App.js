@@ -16,7 +16,7 @@ function App() {
           <Route path='/' element={<Landing_Page/>}/>
           <Route path="/Sign_Up" element={<SignUp />} /> 
           <Route path="/Login" element={<Login />} />
-          <Route path="/instant-consultation" element={<InstantConsultation/>} />
+          <Route path="/Instant-consultation" element={<InstantConsultation/>} />
         </Routes>
        </Notification>
       </BrowserRouter>
