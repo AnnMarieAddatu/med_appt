@@ -11,12 +11,14 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Navbar/>
+       <Notification>
         <Routes>
           <Route path='/' element={<Landing_Page/>}/>
           <Route path="/Sign_Up" element={<SignUp />} /> 
           <Route path="/Login" element={<Login />} />
           <Route path="/instant-consultation" element={<InstantConsultation/>} />
         </Routes>
+       </Notification>
       </BrowserRouter>
     </div>
   );
